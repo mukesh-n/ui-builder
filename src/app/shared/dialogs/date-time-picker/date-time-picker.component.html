@@ -1,0 +1,6 @@
+<div class="w-100 d-flex flex-column align-items-center pt-5 pb-3 px-3">
+  <ngb-datepicker [(ngModel)]="date"></ngb-datepicker>
+  <ngb-timepicker [(ngModel)]="time" [meridian]="true"></ngb-timepicker>
+  <button (click)="Ok()" class="btn btn-outline-primary w-100 mt-3">Ok</button>
+  <button (click)="cancel()" class="btn btn-outline-danger mt-3 w-100">Cancel</button>
+</div>

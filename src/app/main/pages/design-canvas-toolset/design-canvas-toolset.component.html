@@ -1,0 +1,185 @@
+<div
+  class="d-flex flex-column h-100 bg-custom-background bg-light"
+  style="position: relative"
+>
+  <div class="d-flex flex-row border-bottom">
+    <div
+      (click)="showCustom()"
+      [ngClass]="{
+        'shadow-sm bg-dark text-white   toggle': !toggleswitch,
+        'bg-light': toggleswitch
+      }"
+      class="w-50 text-dark toggleswitch cursor-pointer p-1 border-end"
+    >
+      <div class="x-small text-center">Custom</div>
+    </div>
+    <div
+      [ngClass]="{
+        'shadow-sm bg-dark text-white   toggle': toggleswitch,
+        'bg-light': !toggleswitch
+      }"
+      (click)="showToolSets()"
+      class="w-50 text-dark toggleswitch cursor-pointer p-1"
+    >
+      <div class="text-center x-small text-center">Tool Box</div>
+    </div>
+  </div>
+
+  <div
+    style="position: absolute; bottom: 0"
+    class="d-flex flex-row bg-light w-100"
+  >
+    <button
+      *ngIf="toggleswitch"
+      class="flex-grow-1 btn btn-sm btn-outline-secondary rounded-0"
+      (click)="modifyAndEmit()"
+    >
+      <span class="x-small">Update</span>
+    </button>
+    <button
+      *ngIf="toggleswitch"
+      class="flex-grow-1 btn btn-sm btn-secondary rounded-0"
+      (click)="createAndEmit()"
+    >
+      <span class="x-small">Create</span>
+    </button>
+  </div>
+
+  <div
+    *ngIf="toggleswitch"
+    class="flex-grow-1 text-dark overflow-auto p-2"
+    style="height: 0px"
+  >
+    <div
+      (click)="AddClass()"
+      class="d-flex flex-row align-items-center mb-2 cursor-pointer"
+    >
+      <div class="x-small">Add Class</div>
+      <i class="fa-solid fa-plus ms-auto"></i>
+    </div>
+    <div *ngFor="let item of toolkit.toolset.classname; let i = index" class="">
+      <div class="d-flex flex-row align-items-center">
+        <input
+          type="text"
+          class="form-control form-control-sm rounded-0 bg-secondary text-white"
+          [id]="'classi' + [i]"
+          [name]="'classn' + [i]"
+          placeholder="Class Name"
+          [(ngModel)]="item.class"
+        />
+        <i
+          (click)="deleteClass(item.class)"
+          style="font-size: 13px"
+          class="ms-2 text-primary fa-solid fa-trash cursor-pointer"
+        ></i>
+      </div>
+    </div>
+
+    <!-- <div
+      (click)="Addstyle()"
+      class="d-flex flex-row align-items-center mb-2 mt-3 cursor-pointer"
+    >
+      <div class="x-small">Add Style</div>
+      <i class="fa-solid fa-plus ms-auto"></i>
+    </div> -->
+    <div *ngFor="let item of toolkit.toolset.styles; let i = index" class="">
+      <div class="d-flex flex-row align-items-center">
+        <div class="flex-grow-1">
+          <input
+            type="text"
+            class="form-control form-control-sm rounded-0 bg-secondary text-white"
+            [id]="'stylekeyi' + [i]"
+            [name]="'stylekeyn' + [i]"
+            placeholder="Key"
+            [(ngModel)]="item['key']"
+          />
+        </div>
+        <div class="flex-grow-1">
+          <input
+            type="text"
+            class="form-control form-control-sm rounded-0 bg-secondary text-white"
+            [id]="'stylevaluei' + [i]"
+            [name]="'stylevaluen' + [i]"
+            placeholder="Value"
+            [(ngModel)]="item['value']"
+          />
+        </div>
+        <i
+          (click)="deleteStyle(item)"
+          style="font-size: 13px"
+          class="ms-2 text-primary fa-solid fa-trash cursor-pointer"
+        ></i>
+      </div>
+    </div>
+  </div>
+  <div
+    *ngIf="!toggleswitch"
+    class="flex-grow-1 overflow-auto p-2 bg-light"
+    style="height: 0px"
+  >
+    <div class="row g-0">
+      <div *ngFor="let item of toolbox; let i = index" class="col-6 px-1 mb-2">
+        <div
+          [ngbPopover]="toolboxpopovercontent"
+          #toolboxpopover="ngbPopover"
+          [autoClose]="false"
+          placement="left"
+          class="w-100 border cursor-pointer shadow-sm bg-secondary d-flex align-items-center justify-content-center no-overflow-popover"
+        >
+          <div class="text-white x-small text-center m-2">
+            {{ item.label }}
+          </div>
+        </div>
+
+        <ng-template #toolboxpopovercontent>
+          <div class="d-flex flex-column">
+            <div class="d-flex align-items-center mb-3">
+              <div class="fs-6 flex-grow-1 me-3">Settings</div>
+              <i
+                class="fa-solid fa-xmark cursor-pointer"
+                (click)="update('Button'); toolboxpopover.close()"
+              ></i>
+            </div>
+          </div>
+
+          <div class="mb-2">
+            <div class="x-small">Button Name</div>
+            <input
+              type="text"
+              class="form-control form-control-sm"
+              id="buttoni"
+              name="buttonn"
+              [(ngModel)]="toolboxsetting.name"
+            />
+          </div>
+          <div class="mb-2">
+            <div class="x-small">Button Colour</div>
+            <ng-select
+              [items]="colourlist"
+              class="custom"
+              id="colouri"
+              name="colourn"
+              bindLabel="label"
+              bindValue="value"
+              [(ngModel)]="toolboxsetting.colour"
+            >
+            </ng-select>
+          </div>
+          <div class="mb-2">
+            <div class="x-small">Button Size</div>
+            <ng-select
+              [items]="sizelist"
+              class="custom"
+              id="sizei"
+              name="sizen"
+              bindLabel="label"
+              bindValue="value"
+              [(ngModel)]="toolboxsetting.size"
+            >
+            </ng-select>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,46 @@
+.toggle:hover {
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.ng-select.custom {
+  border: 0px;
+  max-height: 30px;
+  min-height: 30px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.ng-select.custom .ng-select-container {
+  max-height: 30px;
+  min-height: 30px;
+
+  font-size: 12px;
+  border-radius: 3px;
+}
+
+.ng-select.custom ::ng-deep .ng-select-container {
+  max-height: 30px;
+  min-height: 30px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.no-overflow-popover {
+  overflow: visible !important;
+}
+
+.bg-custom-background {
+  background-color: rgb(179, 58, 171);
+}
+
+// #backg {
+//   background-image: url(../../../../assets/images/bg.jpeg);
+//   object-fit: fill;
+// }
+// .glass {
+//   /* From https://css.glass */
+//   background: rgba(255, 255, 255, 0.2);
+//   border-radius: 16px;
+//   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+//   backdrop-filter: blur(5px);
+//   -webkit-backdrop-filter: blur(5px);
+//   border: 1px solid rgba(255, 255, 255, 0.3);
+// }

@@ -1,0 +1,99 @@
+<div
+  class="d-flex flex-column h-100  bg-secondary border-bottom border-light text-white"
+>
+  <div class="d-flex flex-row p-2 text-white border-bottom border-light x-small">Design Canvas</div>
+  <div class="row flex-grow-1 g-0">
+    <div class="d-flex flex-column col-2 h-100">
+      <div
+        *ngIf="hierarchy"
+        class="p-1 flex-grow-1 overflow-auto overflow-x-auto"
+        style="height: 0px"
+      >
+        <ng-container
+          *ngTemplateOutlet="recursiveTree; context: { $implicit: hierarchy }"
+        ></ng-container>
+      </div>
+    </div>
+
+    <div class="col-4">
+      <textarea
+        style="height: 100%; width: 100%"
+        class="bg-dark text-white small p-2 rounded-0"
+        [(ngModel)]="rawhtml"
+      >
+      </textarea>
+    </div>
+    <div class="d-flex flex-column col-4 p-2">
+      <div
+        class="flex-grow-1 overflow-auto small"
+        style="height: 0px"
+        [innerHTML]="rawhtml | safeHtml"
+      ></div>
+    </div>
+
+    <div class="col-2 border-start bg-light">
+      <app-design-canvas-toolset
+        [rawhtml]="rawhtml"
+        [nodeid]="nodeid"
+        (modifiedHtml)="onModifiedHtml($event)"
+      ></app-design-canvas-toolset>
+    </div>
+  </div>
+</div>
+<ng-template #recursiveTree let-node>
+  <div class="mb-2" *ngFor="let item of node">
+    <div
+      (click)="selectedNode(item)"
+      class="mb-2 d-flex flex-row align-items-center"
+      [ngClass]="{
+        'bg-primary text-dark fw-bold rounded shadow-sm': item == selectednode,
+        '  ': item != selectednode
+      }"
+      style="cursor: pointer"
+    >
+      <i
+        *ngIf="item.collapsed"
+        [ngClass]="{
+          'bg-white shadow-sm': item == selectednode,
+          'bg-light shadow-sm': item != selectednode
+        }"
+        (click)="toggleCollapse(item)"
+        class="fa-solid fa-arrows-left-right-to-line text-muted small me-3 p-2 border rounded"
+      ></i>
+      <i
+        *ngIf="!item.collapsed"
+        (click)="toggleCollapse(item)"
+        [ngClass]="{
+          'bg-white  shadow-sm': item == selectednode,
+          'bg-light  shadow-sm': item != selectednode
+        }"
+        class="fa-solid fa-arrows-up-down text-muted small me-3 p-2 border rounded"
+      ></i>
+      <span class="x-small">
+        Node {{ item.level }} {{ "[" + item.tag + "]" }}</span
+      >
+      <i
+        *ngIf="item == selectednode"
+        (click)="updateNode(item); $event.stopPropagation()"
+        style="font-size: 13px"
+        [ngClass]="{ 'p-1 bg-white rounded shadow-sm': isedit }"
+        class="fa-solid fa-pencil ms-auto"
+      ></i>
+      <i
+        *ngIf="item == selectednode"
+        (click)="getNode(item); $event.stopPropagation()"
+        [ngClass]="{ 'p-1 bg-white rounded shadow-sm': iscreate }"
+        style="font-size: 13px"
+        class="fa-solid fa-plus mx-2"
+      ></i>
+    </div>
+    <div
+      class="ms-2"
+      *ngIf="item.children && item.children.length > 0 && !item.collapsed"
+    >
+      <ng-container
+        *ngTemplateOutlet="recursiveTree; context: { $implicit: item.children }"
+      ></ng-container>
+    </div>
+  </div>
+</ng-template>

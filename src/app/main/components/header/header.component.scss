@@ -1,0 +1,15 @@
+@import "bootstrap/scss/bootstrap";
+.menu-item {
+  &.active {
+    > .menu-item-text {
+      font-weight: bold;
+    }
+  }
+}
+
+
+.shadow-background {
+  background-color: #1a1a1a; /* Dark background color */
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* White shadow */
+  color: white; /* Text color, adjust as needed */
+}

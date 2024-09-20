@@ -1,0 +1,133 @@
+@import "./custom-bootstrap.scss";
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Lato", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  margin: 0px;
+}
+.h-100 {
+  height: 100%;
+}
+.h-v-100 {
+  height: 100vh;
+}
+.max-height-v-70 {
+  max-height: 70vh;
+}
+.height-v-70 {
+  height: 70vh;
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.overflow-auto {
+  overflow: auto;
+}
+.overflow-x-scroll {
+  overflow-x: scroll;
+}
+.overflow-y-scroll {
+  overflow-y: scroll;
+}
+::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+.smaller {
+  font-size: smaller;
+}
+.x-small {
+  font-size: 12px;
+}
+.xx-small {
+  font-size: xx-small;
+}
+.btn-primary {
+  color: #fff;
+}
+.btn-outline-primary:hover {
+  color: #fff;
+}
+.slickgrid-container .grid-canvas .slick-row.odd {
+  background-color: $light;
+}
+.text-green-tint-1 {
+  color: #7fbf7f;
+}
+.cursor-move {
+  cursor: move;
+}
+.shadow-on-hover {
+  transition: box-shadow 0.3s ease; /* Smooth transition for the shadow */
+  color: #6c757d;
+}
+.shadow-on-hover:hover {
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5); /* Box shadow properties */
+  color: black;
+  font-weight: bold;
+  background-color: rgba(244, 159, 42, 0.1);
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.custom-actions {
+  display: none;
+}
+
+.custom-action-container:hover > .custom-actions {
+  display: block;
+}
+
+.increase-opacity-on-hover {
+  opacity: 0.4;
+  transition: opacity 0.3s ease; /* Smooth transition for the shadow */
+}
+.increase-opacity-on-hover:hover {
+  opacity: 1;
+}
+
+.border-bottom-style-dashed {
+  border-bottom-style: dashed;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 0.5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.pointer-events-none{
+  pointer-events: none;
+}
+
+.primary-shaded {
+  background-color: rgba(244, 159, 42, 0.1);
+}
